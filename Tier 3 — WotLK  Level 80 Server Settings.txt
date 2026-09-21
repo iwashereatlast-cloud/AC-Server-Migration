@@ -1,0 +1,17 @@
+Tier 3 — WotLK / Level 80
+
+After Black Temple is beaten:
+worldserver.conf
+Expansion = 2
+MaxPlayerLevel = 80
+
+playerbots.conf
+AiPlayerbot.RandomBotMaxLevel = 80
+AiPlayerbot.LimitTalentsExpansion = 0
+AiPlayerbot.RandomBotMaps = 0,1,530,571
+AiPlayerbot.LimitEnchantExpansion = 1
+AiPlayerbot.LimitGearExpansion = 1
+
+Run "E:\Server Build\classic-mode.up.sql"
+
+This restores the boats as well as keep the dark portal open.

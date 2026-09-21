@@ -1,0 +1,22 @@
+# ==============================
+# NORMAL WOTLK / STOCK SETTINGS
+# ==============================
+
+# WotLK expansion
+Expansion = 2
+
+# Normal WotLK level cap
+MaxPlayerLevel = 80
+
+
+# ==============================
+# PLAYERBOTS
+# ==============================
+
+# Allow bots to reach the normal WotLK cap
+AiPlayerbot.RandomBotMaxLevel = 80
+
+# Don't artificially restrict bots to an expansion's talent trees
+AiPlayerbot.LimitTalentsExpansion = 0
+
+Then restart worldserver.

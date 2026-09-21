@@ -1,0 +1,35 @@
+1. worldserver.conf
+Expansion = 2
+MaxPlayerLevel = 60
+
+2. playerbots.conf
+Set:
+AiPlayerbot.RandomBotMinLevel = 1
+AiPlayerbot.RandomBotMaxLevel = 60
+AiPlayerbot.DeleteRandomBotAccounts = 1
+3. Start worldserver
+
+Let it delete the old random-bot accounts.
+
+4. Stop worldserver
+Change:
+AiPlayerbot.DeleteRandomBotAccounts = 0
+
+5. Start worldserver again
+It will generate your new bot population using the 1–60 range.
+That's it.
+Don't manually delete anything from SQL. Don't touch your real player accounts. Don't change Expansion.
+
+When you beat AQ40, change the two caps:
+
+MaxPlayerLevel = 70
+AiPlayerbot.RandomBotMaxLevel = 70
+
+Then unlock Outland.
+
+After Black Temple:
+
+MaxPlayerLevel = 80
+AiPlayerbot.RandomBotMaxLevel = 80
+
+Then unlock Northrend.

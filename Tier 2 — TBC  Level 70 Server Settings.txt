@@ -1,0 +1,17 @@
+Tier 2 — TBC / Level 70
+After AQ40 is beaten:
+worldserver.conf
+Expansion = 2
+MaxPlayerLevel = 70
+
+playerbots.conf
+AiPlayerbot.RandomBotMaxLevel = 70
+AiPlayerbot.LimitTalentsExpansion = 0
+AiPlayerbot.RandomBotMaps = 0,1,530
+AiPlayerbot.LimitEnchantExpansion = 1
+AiPlayerbot.LimitGearExpansion = 1
+
+Run "E:\Server Build\classic-mode.up.sql"
+Then run "E:\Server Build\classic-wotlk-mode.down.sql"
+
+This restores the Dark portal and then disables the boats to Northrend.

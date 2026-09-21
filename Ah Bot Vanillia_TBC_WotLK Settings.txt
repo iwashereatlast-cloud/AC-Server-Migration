@@ -1,0 +1,123 @@
+###################################################################################
+#										  #
+#				Vanilla AH SETTINGS				  #
+#										  #
+###################################################################################
+
+Run this in Power shell to limit the server from to Vanilla only items in the AH
+
+___________________________________________________________________________________
+
+$config = 'E:\Server Build\Build\bin\Release\configs\modules\mod_ahbot.conf'
+$filter = 'E:\AHBot-VanillaFilter\ahbot-blocked-expansion-ids.txt'
+
+# Backup the current live config
+$backup = "$config.backup-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+Copy-Item $config $backup
+
+# Read the generated TBC/WotLK block list
+$blocked = (Get-Content $filter -Raw).Trim()
+
+# Remove an existing DisabledCustomItemIDs setting, if present
+$content = Get-Content $config -Raw
+$content = [regex]::Replace(
+    $content,
+    '(?m)^[ \t]*AuctionHouseBot\.DisabledCustomItemIDs[ \t]*=.*\r?\n?',
+    ''
+)
+
+# Add the generated expansion block list
+$content = $content.TrimEnd() + "`r`n`r`n" +
+    "AuctionHouseBot.DisabledCustomItemIDs = $blocked`r`n"
+
+Set-Content $config $content -Encoding UTF8
+
+Write-Host "DONE"
+Write-Host "Config: $config"
+Write-Host "Backup: $backup"
+Write-Host "Blocked IDs: $($blocked.Split(',').Count) individual entries/ranges"
+Write-Host "Config size: $((Get-Item $config).Length) bytes"
+
+___________________________________________________________________________________
+
+Then on the server console:
+.ahbot reload
+.ahbot empty
+.ahbot update
+
+###################################################################################
+#										  #
+#				TBC AH SETTINGS					  #
+#										  #
+###################################################################################
+
+Run this in Power shell to move server from current Vanilla Limits to TBC Limits
+
+___________________________________________________________________________________
+
+function Set-AHBotEra {
+    param([ValidateSet("Vanilla","TBC")][string]$Era)
+
+    $config = "E:\Server Build\Build\bin\Release\configs\modules\mod_ahbot.conf"
+    $dir = "E:\AHBot-VanillaFilter"
+
+    $listFile = if ($Era -eq "Vanilla") {
+        "$dir\ahbot-blocked-expansion-ids.txt"
+    } else {
+        "$dir\ahbot-wotlk-only-block-list.txt"
+    }
+
+    if (-not (Test-Path $listFile)) {
+        throw "Missing filter: $listFile"
+    }
+
+    Copy-Item $config "$config.backup-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+
+    $list = Get-Content $listFile -Raw
+    $text = Get-Content $config -Raw
+
+    $text = [regex]::Replace(
+        $text,
+        '(?m)^AuctionHouseBot\.DisabledInvalidItemIDs\s*=.*$',
+        "AuctionHouseBot.DisabledInvalidItemIDs = $($list.Trim())"
+    )
+
+    Set-Content $config $text -NoNewline
+
+    Write-Host ""
+    Write-Host "AHBot era switched to: $Era"
+    Write-Host "Filter entries: $($list.Trim().Split(',').Count)"
+    Write-Host "Config backup created."
+}
+
+___________________________________________________________________________________
+
+Then on the server console:
+.ahbot reload
+.ahbot empty
+.ahbot update
+
+###################################################################################
+#										  #
+#				WotLK AH SETTINGS				  #
+#										  #
+###################################################################################
+
+Run this in Power shell to move server from TBC Limits to WotLK Limits
+
+___________________________________________________________________________________
+
+$text = [regex]::Replace(
+    $text,
+    '(?m)^AuctionHouseBot\.DisabledInvalidItemIDs\s*=.*\r?\n?',
+    ''
+)
+
+___________________________________________________________________________________
+
+hen on the server console:
+.ahbot reload
+.ahbot empty
+.ahbot update
+
+###################################################################################

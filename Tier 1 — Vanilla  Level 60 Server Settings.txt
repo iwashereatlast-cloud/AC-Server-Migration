@@ -1,0 +1,14 @@
+Tier 1 — Vanillia / Level 60
+worldserver.conf
+Expansion = 2
+MaxPlayerLevel = 60
+
+playerbots.conf
+AiPlayerbot.RandomBotMaxLevel = 60
+AiPlayerbot.LimitTalentsExpansion = 0
+AiPlayerbot.RandomBotMaps = 0,1,
+AiPlayerbot.LimitEnchantExpansion = 1
+AiPlayerbot.LimitGearExpansion = 1
+
+Run "E:\Server Build\classic-mode.up.sql"
+this disables the Dark Portal and boats to Northrend
