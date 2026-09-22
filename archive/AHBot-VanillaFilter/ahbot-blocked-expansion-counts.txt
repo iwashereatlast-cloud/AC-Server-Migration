@@ -1,0 +1,8 @@
+Vanilla IDs: 14985
+TBC IDs: 25097
+WotLK IDs: 38294
+TBC-only IDs: 10212
+WotLK-only IDs: 13700
+Total blocked IDs: 23912
+Compressed ranges: 1539
+Blocked list characters: 16059

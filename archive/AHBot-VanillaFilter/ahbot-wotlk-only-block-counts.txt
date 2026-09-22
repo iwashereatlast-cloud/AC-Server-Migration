@@ -1,0 +1,12 @@
+WotLK-only AHBot exclusion list
+================================
+
+Source:
+WotLK snapshot minus TBC snapshot
+
+WotLK-only IDs: 13700
+Compressed entries: 1174
+Characters: 11794
+
+Output:
+E:\AHBot-VanillaFilter\ahbot-wotlk-only-block-list.txt
